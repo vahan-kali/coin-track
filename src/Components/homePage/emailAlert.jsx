@@ -21,7 +21,7 @@ const EmailAlert = () => {
           <AlertButton>Set Alert</AlertButton>
         </Form>
       </SpeechBubbleWrapper>
-      <Cartoon src={"pictures/btcCartoon.png"} />
+      <Cartoon src={"/btcCartoon.png"} />
     </Wrapper>
   );
 };

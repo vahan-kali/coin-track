@@ -5,13 +5,19 @@ import { AiOutlineMail } from "react-icons/ai";
 const NewsFooter = () => {
   return (
     <Wrapper>
-      <NewsLetterLabel for="newsLetter">Subscribe for FREE</NewsLetterLabel>
-      <NewsLetterInputFieldWrapper>
-        <NewLetterInput id="newsLetter" placeholder="enter your email here" />
-        <NewsLetterBottom>
-          <AiOutlineMail style={{ color: "#FF9906", "font-size": "30px" }} />
-        </NewsLetterBottom>
-      </NewsLetterInputFieldWrapper>
+      <Form method="post" action="/storeEmail">
+        <NewsLetterLabel for="newsLetter">Subscribe for FREE</NewsLetterLabel>
+        <NewsLetterInputFieldWrapper>
+          <NewLetterInput
+            name="email"
+            id="newsLetter"
+            placeholder="enter your email here"
+          />
+          <NewsLetterButton type="submit">
+            <AiOutlineMail style={{ color: "#FF9906", "font-size": "30px" }} />
+          </NewsLetterButton>
+        </NewsLetterInputFieldWrapper>
+      </Form>
     </Wrapper>
   );
 };
@@ -22,6 +28,8 @@ const Wrapper = styled.div`
   flex-direction: column;
   margin: 5px 25px;
 `;
+
+const Form = styled.form``;
 
 const NewsLetterLabel = styled.label`
   text-align: center;
@@ -36,7 +44,7 @@ const NewsLetterInputFieldWrapper = styled.form`
   align-items: center;
 `;
 
-const NewsLetterBottom = styled.button`
+const NewsLetterButton = styled.button`
   border: none;
   background: none;
   &:hover {

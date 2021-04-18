@@ -1,6 +1,7 @@
 import React, { useState, useEffect } from "react";
 import styled from "styled-components";
-import { AiOutlineArrowUp } from "react-icons/ai";
+
+import GlobalCryptoMarket from "../GlobalCryptoMarket";
 
 const HeroBanner = ({ darkImage }) => {
   const [marketChange, setMarketChange] = useState(false);
@@ -14,31 +15,7 @@ const HeroBanner = ({ darkImage }) => {
       <BackgroundImage changeImage={darkImage === "dark"} />
       <ContentWrapper>
         <Title>Coin Track</Title>
-        <DataWrapper>
-          <MarketCapWrapper>
-            <MarketCapTitle>Market Cap</MarketCapTitle>
-            <MarketCapValue>100</MarketCapValue>
-            <MarketCapChangeWrapper>
-              <MarketCapChange onChange={(e) => change(e)}>
-                5.9%
-              </MarketCapChange>
-              <AiOutlineArrowUp />
-            </MarketCapChangeWrapper>
-          </MarketCapWrapper>
-          <VolumeWrapper>
-            <VolumeTitle>Volume 24h</VolumeTitle>
-            <VolumeValue>50</VolumeValue>
-            <VolumeChangeWrapper>
-              <VolumeChange
-                onClick={(e) => change(e)}
-                negativeChange={marketChange}
-              >
-                -4.4%
-              </VolumeChange>
-              <AiOutlineArrowUp />
-            </VolumeChangeWrapper>
-          </VolumeWrapper>
-        </DataWrapper>
+        <GlobalCryptoMarket />
       </ContentWrapper>
     </Wrapper>
   );
@@ -71,48 +48,10 @@ const ContentWrapper = styled.div`
   transform: translate(-50%, -50%);
 `;
 
-const DataWrapper = styled.div`
-  display: flex;
-  align-items: center;
-  font-size: 35px;
-  border-top: solid 2px #ff9906;
-  border-bottom: solid 2px #ff9906;
-  justify-content: space-between;
-  min-width: 500px;
-  margin-top: 10px;
-`;
-
 const Title = styled.h1`
   text-align: center;
   font-size: 45px;
   color: #ff9906;
 `;
 
-const MarketCapWrapper = styled.div`
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  color: #ff9906;
-`;
-const MarketCapTitle = styled.h2``;
-const MarketCapValue = styled.h3``;
-const MarketCapChange = styled.span``;
-const VolumeWrapper = styled.div`
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  color: #ff9906;
-`;
-
-const MarketCapChangeWrapper = styled.div``;
-const VolumeTitle = styled.h2``;
-const VolumeValue = styled.h3``;
-const VolumeChange = styled.span`
-  ${({ negativeChange }) =>
-    negativeChange &&
-    `
-color: red
-`};
-`;
-const VolumeChangeWrapper = styled.div``;
 export default HeroBanner;

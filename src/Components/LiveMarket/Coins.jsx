@@ -40,7 +40,6 @@ const Wrapper = styled.div`
 const CoinIdWrapper = styled.div`
   display: flex;
   align-items: center;
-  justify-content: space-evenly;
 `;
 
 const CoinLogo = styled.img`

@@ -1,9 +1,9 @@
-// const express = require("express");
+const express = require("express");
 
-// const router = express.Router();
+const router = express.Router();
 
-// const { storeEmail } = require("./handlers/emails");
+const { storeEmail } = require("./handlers/emails");
 
-// router.post("/storeEmail", storeEmail);
+router.post("/storeEmail", storeEmail);
 
-// module.exports = router;
+module.exports = router;

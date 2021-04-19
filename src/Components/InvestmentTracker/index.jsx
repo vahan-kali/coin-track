@@ -9,6 +9,15 @@ Modal.setAppElement("#root");
 const InvestmentTracker = () => {
   const [priceChange, setPriceChange] = useState(" ");
   const [modalIsOpen, setModalIsOpen] = useState(false);
+  const [coins, setCoins] = useState([]);
+
+  useEffect(() => {
+    fetch("/cryptocurrencies/liveMarket")
+      .then((data) => data.json())
+      .then((response) => setCoins(response.data));
+  });
+
+  const filteredCoins = coins.filter((coin) => coin.name.toLowerCase());
 
   return (
     <Wrapper>
@@ -31,7 +40,8 @@ const InvestmentTracker = () => {
           <label for="buy">Buy</label>
           <input type="radio" id="sell" name="orderType" value="sell" />
           <label for="buy">Sell</label>
-          <label for="cars">Choose a car:</label>
+          <label for="coins">Track a coin:</label>
+          <select id="coins" name="coins"></select>
         </Form>
       </Modal>
     </Wrapper>

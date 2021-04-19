@@ -7,7 +7,7 @@ const GlobalCryptoMarket = () => {
   const [globalVolume, setGlobalVolume] = useState(0);
 
   // useEffect(() => {
-  //   fetch("cryptocurrencies/globalData")
+  //   fetch("/cryptocurrencies/globalData")
   //     .then((data) => data.json())
   //     .then((response) => {
   //       console.log(response, "global crypto data");

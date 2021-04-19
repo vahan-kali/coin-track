@@ -3,9 +3,22 @@ import styled from "styled-components";
 import { AiOutlineMail } from "react-icons/ai";
 
 const NewsFooter = () => {
+  const handleNewsLetterFormSubmit = (e) => {
+    e.preventDefault();
+    console.log(e.target.email.value);
+    fetch("/email/storeEmail", {
+      method: "POST",
+      headers: {
+        Accept: "application/json",
+        "Content-Type": "application/json",
+      },
+      body: JSON.stringify({ email: e.target.email.value }),
+    });
+  };
+
   return (
     <Wrapper>
-      <Form method="post" action="/storeEmail">
+      <Form method="post" onSubmit={handleNewsLetterFormSubmit}>
         <NewsLetterLabel for="newsLetter">Subscribe for FREE</NewsLetterLabel>
         <NewsLetterInputFieldWrapper>
           <NewLetterInput
@@ -39,7 +52,7 @@ const NewsLetterLabel = styled.label`
 
 const NewLetterInput = styled.input``;
 
-const NewsLetterInputFieldWrapper = styled.form`
+const NewsLetterInputFieldWrapper = styled.div`
   display: flex;
   align-items: center;
 `;
@@ -47,9 +60,9 @@ const NewsLetterInputFieldWrapper = styled.form`
 const NewsLetterButton = styled.button`
   border: none;
   background: none;
+  outline: none;
   &:hover {
     cursor: pointer;
-    outline: none;
   }
 `;
 export default NewsFooter;

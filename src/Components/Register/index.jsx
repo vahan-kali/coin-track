@@ -1,14 +1,13 @@
 import React from "react";
 import styled from "styled-components";
-import { Link } from "react-router-dom";
 import { useHistory } from "react-router-dom";
 
-const LogIn = () => {
+const Register = () => {
   const history = useHistory();
 
-  const handleLoginFormSubmit = (e) => {
+  const handleRegisterFormSubmit = (e) => {
     e.preventDefault();
-    fetch("/user/login", {
+    fetch("/user/register", {
       method: "POST",
       headers: {
         Accept: "application/json",
@@ -16,36 +15,48 @@ const LogIn = () => {
       },
       body: JSON.stringify({
         email: e.target.email.value,
+        username: e.target.username.value,
         password: e.target.password.value,
+        passwordConfirmation: e.target.confirmPassword.value,
       }),
     })
       .then((response) => response.json())
       .then((result) => {
-        if (result.status === 404 || result.status === 400) {
+        if (result.status === 400) {
           alert(result.message);
-        } else if (result.status === 200) {
-          history.push("/");
+        } else if (result.status === 201) {
+          history.push("/login");
         }
       })
       .catch((err) => {
         console.log(err, "error");
       });
   };
-
   return (
     <Wrapper>
       <BackgroundImage>
-        <LoginWrapper method="post" onSubmit={handleLoginFormSubmit}>
-          <LogInGreeting>Log In To Track Your Crypto Investments</LogInGreeting>
-          <SignInInput type="email" name="email" placeholder="Your email" />
-          <SignInInput
+        <RegisterWrapper method="POST" onSubmit={handleRegisterFormSubmit}>
+          <RegisterGreeting>
+            Register to track your investments
+          </RegisterGreeting>
+          <RegsiterInput
+            type="text"
+            name="username"
+            placeholder="Your username"
+          />
+          <RegsiterInput type="email" name="email" placeholder="Your email" />
+          <RegsiterInput
             type="password"
             name="password"
             placeholder="Enter your password"
           />
-          <SignInButton type="submit">Submit</SignInButton>
-          <RegisterButton to="/register">Register Here</RegisterButton>
-        </LoginWrapper>
+          <RegsiterInput
+            type="password"
+            name="confirmPassword"
+            placeholder="Confirm your password"
+          />
+          <RegisterButton type="submit">Submit</RegisterButton>
+        </RegisterWrapper>
       </BackgroundImage>
     </Wrapper>
   );
@@ -61,7 +72,7 @@ const BackgroundImage = styled.div`
   width: 100%;
 `;
 
-const LoginWrapper = styled.form`
+const RegisterWrapper = styled.form`
   position: absolute;
   display: flex;
   flex-direction: column;
@@ -71,19 +82,16 @@ const LoginWrapper = styled.form`
   transform: translate(-50%, -50%);
 `;
 
-const LogInGreeting = styled.h2``;
-
-const RegisterButton = styled(Link)`
-  text-decoration: none;
-  background: white;
-  text-align: center;
+const RegisterGreeting = styled.h2`
+  color: white;
+  background: #ff9906;
 `;
 
-const SignInInput = styled.input``;
+const RegsiterInput = styled.input``;
 
-const SignInButton = styled.button`
+const RegisterButton = styled.button`
   background: #ff9906;
   color: white;
 `;
 
-export default LogIn;
+export default Register;

@@ -3,6 +3,7 @@ import styled from "styled-components";
 import { BsStar } from "react-icons/bs";
 
 const Coins = ({
+  coinId,
   name,
   price,
   symbol,
@@ -11,22 +12,44 @@ const Coins = ({
   image,
   priceChange,
 }) => {
+  const [isFavorite, setIsFavorite] = useState(false);
+
+  const handleFavorite = (e) => {
+    console.log(coinId);
+    fetch("/user/storeFavoriteCoin", {
+      method: "POST",
+      headers: {
+        Accept: "application/json",
+        "Content-Type": "application/json",
+      },
+      body: JSON.stringify({ coin: coinId, favorite: !isFavorite }),
+    });
+    if (isFavorite) {
+      setIsFavorite(false);
+    } else {
+      setIsFavorite(true);
+    }
+  };
+
   return (
     <Wrapper>
       <CoinIdWrapper>
-        <CoinLogo src={image} alt="crypto" />
-        <CoinName>{name}</CoinName>
+        <CoinLogo src={image} alt="crypto" /> <CoinName>{name}</CoinName>{" "}
         <CoinTicker>{symbol.toUpperCase()}</CoinTicker>
       </CoinIdWrapper>
-
-      <CoinPrice>${price}</CoinPrice>
-      <CoinVolume>${volume.toLocaleString()}</CoinVolume>
-      <CoinMarketCap> ${marketcap.toLocaleString()}</CoinMarketCap>
-      {priceChange < 0 ? (
-        <PriceChange>{priceChange.toFixed(2)}%</PriceChange>
-      ) : (
-        <PriceChange>{priceChange.toFixed(2)}%</PriceChange>
-      )}
+      <CoinMarketData>
+        <CoinPrice>${price}</CoinPrice>
+        <CoinVolume>${volume.toLocaleString()}</CoinVolume>
+        <CoinMarketCap> ${marketcap.toLocaleString()}</CoinMarketCap>
+        {priceChange < 0 ? (
+          <PriceChange negative={true}>{priceChange.toFixed(2)}%</PriceChange>
+        ) : (
+          <PriceChange positive={true}>{priceChange.toFixed(2)}%</PriceChange>
+        )}
+      </CoinMarketData>
+      <FavoriteIconWrapper onClick={handleFavorite} favoriteStyle={isFavorite}>
+        <BsStar />
+      </FavoriteIconWrapper>
     </Wrapper>
   );
 };
@@ -36,26 +59,68 @@ const Wrapper = styled.div`
   display: flex;
   align-items: center;
   justify-content: space-around;
+  flex: 1;
+  border-bottom: 2px solid orange;
 `;
 const CoinIdWrapper = styled.div`
   display: flex;
   align-items: center;
+  flex: 0.2;
+  margin: auto;
 `;
 
 const CoinLogo = styled.img`
-  width: 40px;
+  width: 30px;
+  margin-right: 5px;
 `;
 
-const CoinName = styled.p``;
+const CoinMarketData = styled.div`
+  flex: 0.8;
+  margin: auto;
+  display: flex;
+  justify-content: space-around;
+`;
 
-const CoinTicker = styled.p``;
+const FavoriteIconWrapper = styled.div`
+  ${({ favoriteStyle }) =>
+    favoriteStyle &&
+    `
+    color: #ff9906
+`}
+`;
 
-const CoinPrice = styled.p``;
+const CoinName = styled.p`
+  margin-right: 5px;
+`;
 
-const CoinVolume = styled.p``;
+const CoinTicker = styled.p`
+  margin-right: 5px;
+`;
 
-const PriceChange = styled.p``;
+const CoinPrice = styled.p`
+  flex: 0.2;
+`;
 
-const CoinMarketCap = styled.p``;
+const CoinVolume = styled.p`
+  flex: 0.2;
+`;
+
+const PriceChange = styled.p`
+  flex: 0.2;
+  ${({ negative }) =>
+    negative &&
+    `
+color: red
+`}
+  ${({ positive }) =>
+    positive &&
+    `
+color: green
+`}
+`;
+
+const CoinMarketCap = styled.p`
+  flex: 0.2;
+`;
 
 export default Coins;

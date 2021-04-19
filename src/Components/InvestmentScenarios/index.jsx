@@ -1,11 +1,14 @@
-import React from "react";
+import React, { useState } from "react";
 import styled from "styled-components";
 import { Link, useHistory } from "react-router-dom";
 import HodlScenario from "./HodlScenario";
 import FomoScenerio from "./FomoScenario";
 import { AiOutlineInfoCircle } from "react-icons/ai";
+import Modal from "react-modal";
 
 const InvestmentScenarios = () => {
+  const [fomoModal, setFomoModal] = useState(false);
+  const [hodlModal, setHodlModal] = useState(false);
   return (
     <Wrapper>
       <SpeechBubbleWrapper>
@@ -13,14 +16,23 @@ const InvestmentScenarios = () => {
           {window.location.pathname === "/investmentScenarios" &&
             " What type of scenerio do you want me to assess?"}
           {window.location.pathname === "/investmentScenarios" && (
-            <FomoWrapper exact to="/investmentScenarios/fomoScenario">
-              FOMO Scenerio
-              <AiOutlineInfoCircle />
+            <FomoWrapper>
+              <ScenarioTypeTitle exact to="/investmentScenarios/fomoScenario">
+                FOMO Scenerio
+              </ScenarioTypeTitle>
+              <ScenarioInformationWrapper>
+                <AiOutlineInfoCircle onClick={() => setFomoModal(true)} />
+              </ScenarioInformationWrapper>
             </FomoWrapper>
           )}
           {window.location.pathname === "/investmentScenarios" && (
-            <HodlWrapper exact to="/investmentScenarios/hodlScenario">
-              HODL Scenerio
+            <HodlWrapper>
+              <ScenarioTypeTitle exact to="/investmentScenarios/hodlScenario">
+                HODL Scenerio
+              </ScenarioTypeTitle>
+              <ScenarioInformationWrapper>
+                <AiOutlineInfoCircle onClick={() => setHodlModal(true)} />
+              </ScenarioInformationWrapper>
             </HodlWrapper>
           )}
 
@@ -33,6 +45,12 @@ const InvestmentScenarios = () => {
         </CartoonSpeech>
       </SpeechBubbleWrapper>
       <Cartoon src={"/btcCartoon.png"} alt="bitcoin cartoon" />
+      <Modal isOpen={fomoModal} onRequestClose={() => setFomoModal(false)}>
+        FOMO means FEAR OF MISSING OUT
+      </Modal>
+      <Modal isOpen={hodlModal} onRequestClose={() => setHodlModal(false)}>
+        HODL means HOLD ON FOR DEAR LIFE
+      </Modal>
     </Wrapper>
   );
 };
@@ -77,15 +95,32 @@ const CartoonSpeech = styled.p`
   display: flex;
   flex-direction: column;
 `;
-
-const FomoWrapper = styled(Link)`
+const ScenarioTypeTitle = styled(Link)`
+  margin-right: 5px;
   text-decoration: none;
-  color: black;
+  color: #ff9906;
+  &:hover {
+    border-bottom: 1px solid grey;
+  }
 `;
 
-const HodlWrapper = styled(Link)`
-  text-decoration: none;
-  color: black;
+const ScenarioInformationWrapper = styled.div`
+  display: flex;
+  cursor: pointer;
+`;
+
+const FomoWrapper = styled.div`
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  margin: 5px;
+`;
+
+const HodlWrapper = styled.div`
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  margin: 5px;
 `;
 
 export default InvestmentScenarios;

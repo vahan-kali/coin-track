@@ -1,9 +1,9 @@
 const express = require("express");
 const bodyParser = require("body-parser");
 require("dotenv").config();
-// const { storeEmail } = require("./Routers/handlers/emails");
-// const emailsRoutes = require("./Routers/emailsRoutes");
+const emailsRoutes = require("./Routers/emailsRoutes");
 const cryptocurrenciesRoutes = require("./Routers/cryptocurrenciesRoutes");
+const userRoutes = require("./Routers/usersRoutes");
 const app = new express();
 const port = 8000;
 
@@ -14,7 +14,9 @@ app.use(express.urlencoded({ extended: false }));
 
 app.use("/cryptocurrencies", cryptocurrenciesRoutes);
 
-// app.post("/storeEmail", storeEmail);
+app.use("/email", emailsRoutes);
+
+app.use("/user", userRoutes);
 
 app.listen(port, function (error) {
   if (error) {

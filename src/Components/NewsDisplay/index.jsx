@@ -12,19 +12,18 @@ const animationNews = keyframes`
 const NewsDisplay = () => {
   const [news, setNews] = useState([]);
 
-  // useEffect(() => {
-  //   fetch("/cryptocurrencies/cryptoNews")
-  //     .then((data) => data.json())
-  //     .then((response) => setNews(response.data));
-  // });
+  useEffect(() => {
+    fetch("/cryptocurrencies/cryptoNews")
+      .then((data) => data.json())
+      .then((response) => setNews(response.data));
+  });
   return (
     <Wrapper>
       {/* {news.map((e, index) => (
         <News key={index}>{e.headline}</News>
-      ))} */
-      /**
-       * 1. its working but it stops working after a few seconds (Why? figure out with tc)
-       */}
+      ))} */}
+      {/* * 1. its working but it stops working after a few seconds (Why? figure out
+      with tc) */}
     </Wrapper>
   );
 };

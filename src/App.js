@@ -1,6 +1,7 @@
 import React, { useState, useEffect } from "react";
 import { BrowserRouter, Switch, Route } from "react-router-dom";
 import LogIn from "./Components/LogIn";
+import Register from "./Components/Register";
 import HomePage from "./Components/HomePage";
 import GlobalStyles from "./GlobalStyles";
 import { ThemeProvider } from "styled-components";
@@ -32,6 +33,9 @@ const App = () => {
         <Switch>
           <Route path="/logIn">
             <LogIn />
+          </Route>
+          <Route path="/register">
+            <Register />
           </Route>
           <Route exact path="/">
             <HomePage darkMode={theme} />

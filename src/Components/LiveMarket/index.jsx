@@ -3,7 +3,11 @@ import styled from "styled-components";
 import { NavLink } from "react-router-dom";
 import FavoriteCoins from "./FavoriteCoins";
 import GlobalCryptoMarket from "../GlobalCryptoMarket";
-import { AiOutlineArrowLeft, AiOutlineArrowRight } from "react-icons/ai";
+import {
+  AiOutlineArrowLeft,
+  AiOutlineArrowRight,
+  AiOutlineArrowUp,
+} from "react-icons/ai";
 import Coins from "./Coins";
 
 const LiveMarket = () => {
@@ -57,24 +61,49 @@ const LiveMarket = () => {
         </PaginationIconsWrapper>
       </NavBarWrapper>
       <FilterBarWrapper>
-        <Name>Name</Name>
-        <Price>Price</Price>
-        <Volume>Volume</Volume>
-        <MarketCap>Market Cap</MarketCap>
-        <Change24H>Change 24h(%)</Change24H>
+        <Name>
+          Name
+          <FilterIconWrapper>
+            <AiOutlineArrowUp />
+          </FilterIconWrapper>
+        </Name>
+        <Price>
+          Price
+          <FilterIconWrapper>
+            <AiOutlineArrowUp />
+          </FilterIconWrapper>
+        </Price>
+        <Volume>
+          Volume
+          <FilterIconWrapper>
+            <AiOutlineArrowUp />
+          </FilterIconWrapper>
+        </Volume>
+        <MarketCap>
+          Market Cap
+          <FilterIconWrapper>
+            <AiOutlineArrowUp />
+          </FilterIconWrapper>
+        </MarketCap>
+        <Change24H>
+          Change 24h(%)
+          <FilterIconWrapper>
+            <AiOutlineArrowUp />
+          </FilterIconWrapper>
+        </Change24H>
       </FilterBarWrapper>
       {window.location.pathname === "/liveMarket" &&
-        filteredCoins.map((coins) => {
+        filteredCoins.map((coin) => {
           return (
             <Coins
-              key={coins.id}
-              name={coins.name}
-              price={coins.current_price}
-              symbol={coins.symbol}
-              marketcap={coins.total_volume}
-              volume={coins.market_cap}
-              image={coins.image}
-              priceChange={coins.price_change_percentage_24h}
+              coinId={coin.id}
+              name={coin.name}
+              price={coin.current_price}
+              symbol={coin.symbol}
+              marketcap={coin.total_volume}
+              volume={coin.market_cap}
+              image={coin.image}
+              priceChange={coin.price_change_percentage_24h}
             />
           );
         })}
@@ -124,14 +153,34 @@ const FilterBarWrapper = styled.div`
   padding: 10px;
 `;
 
-const Name = styled.span``;
+const FilterIconWrapper = styled.div`
+  display: flex;
+  align-items: center;
+`;
 
-const Price = styled.span``;
+const Name = styled.span`
+  display: flex;
+  align-items: center;
+`;
 
-const Volume = styled.span``;
+const Price = styled.span`
+  display: flex;
+  align-items: center;
+`;
 
-const MarketCap = styled.span``;
+const Volume = styled.span`
+  display: flex;
+  align-items: center;
+`;
 
-const Change24H = styled.span``;
+const MarketCap = styled.span`
+  display: flex;
+  align-items: center;
+`;
+
+const Change24H = styled.span`
+  display: flex;
+  align-items: center;
+`;
 
 export default LiveMarket;

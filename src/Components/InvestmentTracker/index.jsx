@@ -36,12 +36,32 @@ const InvestmentTracker = () => {
       </AddNewTrackerButton>
       <Modal isOpen={modalIsOpen} onRequestClose={() => setModalIsOpen(false)}>
         <Form>
-          <input type="radio" id="buy" name="orderType" value="buy" />
-          <label for="buy">Buy</label>
-          <input type="radio" id="sell" name="orderType" value="sell" />
-          <label for="buy">Sell</label>
-          <label for="coins">Track a coin:</label>
-          <select id="coins" name="coins"></select>
+          <FormWrapper>
+            <OrderTypeWrapper>
+              <input type="radio" id="buy" name="orderType" value="buy" />
+              <label for="buy">Buy</label>
+              <input type="radio" id="sell" name="orderType" value="sell" />
+              <label for="buy">Sell</label>
+            </OrderTypeWrapper>
+            <ChooseCoinWrapper>
+              <label for="coins">Track a coin:</label>{" "}
+              <select id="coins" name="coin">
+                <option value="bitcoin">Bitcoin</option>
+                <option value="Litecoin">Litecoin</option>
+              </select>
+            </ChooseCoinWrapper>
+            <AmountWrapper>
+              <label for="amount">Amount Sold or Bought:</label>{" "}
+              <input id="amount" type="number" />
+            </AmountWrapper>
+            <MarketPriceBoughtOrSoldAtWrapper>
+              <label for="marketPrice">Market price bought or sold at:</label>{" "}
+              <input id="marketPrice" type="number" />
+            </MarketPriceBoughtOrSoldAtWrapper>
+            <TrackButtonWrapper>
+              <button type="submit">Set Tracker</button>
+            </TrackButtonWrapper>
+          </FormWrapper>
         </Form>
       </Modal>
     </Wrapper>
@@ -58,6 +78,26 @@ const PnlDashboardWrapper = styled.div`
   padding: 50px;
   background: linear-gradient(0deg, green 0%, rgba(0, 0, 0, 0) 90%);
   display: flex;
+`;
+
+const MarketPriceBoughtOrSoldAtWrapper = styled.div``;
+
+const AmountWrapper = styled.div`
+  margin: 10px;
+`;
+
+const TrackButtonWrapper = styled.div`
+  margin: 10px;
+`;
+
+const OrderTypeWrapper = styled.div`
+  display: flex;
+  align-items: center;
+  margin: 10px;
+`;
+
+const ChooseCoinWrapper = styled.div`
+  margin: 10px;
 `;
 
 const PnlDashboard = styled.div`
@@ -78,6 +118,12 @@ const CapitalChangePercentage = styled.h2``;
 const CapitalChangeFiat = styled.h2``;
 
 const Form = styled.form``;
+
+const FormWrapper = styled.div`
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+`;
 
 const AddNewTrackerButton = styled.button`
   height: 25px;

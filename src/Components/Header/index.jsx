@@ -20,7 +20,7 @@ const Header = ({ lightMode, darkMode }) => {
       <NavItems
         style={{
           color: "#FF9906",
-          "font-size": "30px",
+          fontSize: "30px",
           justifyContent: "space-between",
         }}
       >
@@ -38,6 +38,14 @@ const Header = ({ lightMode, darkMode }) => {
             </MenuItem>
             <MenuItem onClick={() => history.push("/investmentScenarios")}>
               Create Investment Scenarios
+            </MenuItem>
+            <MenuItem
+              onClick={() => {
+                localStorage.clear();
+                history.push("/logIn");
+              }}
+            >
+              Log Out
             </MenuItem>
           </DropDown>
         </MenuButton>

@@ -2,8 +2,9 @@ import React from "react";
 import styled from "styled-components";
 import { Link } from "react-router-dom";
 import { useHistory } from "react-router-dom";
+import PropTypes from "prop-types";
 
-const LogIn = () => {
+const LogIn = ({ setToken }) => {
   const history = useHistory();
 
   const handleLoginFormSubmit = (e) => {
@@ -24,6 +25,7 @@ const LogIn = () => {
         if (result.status === 404 || result.status === 400) {
           alert(result.message);
         } else if (result.status === 200) {
+          setToken(result.token);
           history.push("/");
         }
       })
@@ -49,6 +51,10 @@ const LogIn = () => {
       </BackgroundImage>
     </Wrapper>
   );
+};
+
+LogIn.propTypes = {
+  setToken: PropTypes.func.isRequired,
 };
 
 const Wrapper = styled.div``;

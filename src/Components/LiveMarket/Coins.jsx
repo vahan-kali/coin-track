@@ -14,31 +14,52 @@ const Coins = ({
 }) => {
   const [isFavorite, setIsFavorite] = useState(false);
 
-  const handleFavorite = (e) => {
-    console.log(coinId);
-    fetch("/user/storeFavoriteCoin", {
+  const handleFavorite = async (e) => {
+    await fetch("/user/storeFavoriteCoin", {
       method: "POST",
       headers: {
         Accept: "application/json",
         "Content-Type": "application/json",
       },
-      body: JSON.stringify({ coin: coinId, favorite: !isFavorite }),
+      body: JSON.stringify({
+        coin: coinId,
+        favorite: !isFavorite,
+        userToken: localStorage.getItem("token"),
+      }),
     });
-    if (isFavorite) {
-      setIsFavorite(false);
-    } else {
-      setIsFavorite(true);
-    }
+    console.log(isFavorite);
+    setIsFavorite(!isFavorite);
   };
+
+  useEffect(() => {
+    fetch("/user/getFavoriteCoins", {
+      method: "GET",
+      headers: {
+        Accept: "application/json",
+        "Content-Type": "application/json",
+        usertoken: localStorage.getItem("token"),
+      },
+    })
+      .then((response) => response.json())
+      .then((result) => {
+        const keys = Object.keys(result.data);
+        console.log(keys, name);
+        if (keys.includes(coinId)) {
+          setIsFavorite(true);
+        } else {
+          setIsFavorite(false);
+        }
+      });
+  }, [setIsFavorite]);
 
   return (
     <Wrapper>
       <CoinIdWrapper>
-        <CoinLogo src={image} alt="crypto" /> <CoinName>{name}</CoinName>{" "}
+        <CoinLogo src={image} alt={name} /> <CoinName>{name}</CoinName>{" "}
         <CoinTicker>{symbol.toUpperCase()}</CoinTicker>
       </CoinIdWrapper>
       <CoinMarketData>
-        <CoinPrice>${price}</CoinPrice>
+        <CoinPrice>${price.toLocaleString()}</CoinPrice>
         <CoinVolume>${volume.toLocaleString()}</CoinVolume>
         <CoinMarketCap> ${marketcap.toLocaleString()}</CoinMarketCap>
         {priceChange < 0 ? (

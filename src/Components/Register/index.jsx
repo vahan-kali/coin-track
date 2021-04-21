@@ -22,10 +22,13 @@ const Register = () => {
     })
       .then((response) => response.json())
       .then((result) => {
-        if (result.status === 400) {
+        if (result.message === "User already exist. Please sign in") {
+          console.log(result.message);
           alert(result.message);
         } else if (result.status === 201) {
           history.push("/login");
+        } else if (result.status === 400) {
+          alert(result.message);
         }
       })
       .catch((err) => {

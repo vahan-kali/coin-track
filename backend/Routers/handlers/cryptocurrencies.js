@@ -34,6 +34,7 @@ const getCryptoNews = async (req, res) => {
       },
     }
   );
+
   const data = await response.json();
   if (data) {
     res.status(200).json({ status: 200, message: "success!", data: data });

@@ -27,7 +27,7 @@ const NewsFooter = () => {
             placeholder="enter your email here"
           />
           <NewsLetterButton type="submit">
-            <AiOutlineMail style={{ color: "#FF9906", "font-size": "30px" }} />
+            <AiOutlineMail style={{ color: "#FF9906", fontSize: "30px" }} />
           </NewsLetterButton>
         </NewsLetterInputFieldWrapper>
       </Form>

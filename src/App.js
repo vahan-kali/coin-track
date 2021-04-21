@@ -13,8 +13,11 @@ import InvestmentScenarios from "./Components/InvestmentScenarios";
 import NewsDisplay from "./Components/NewsDisplay";
 import Footer from "./Components/Footer";
 import FavoriteCoins from "./Components/LiveMarket/FavoriteCoins";
+import useToken from "./useToken";
 
 const App = () => {
+  const { token, setToken } = useToken();
+
   const [theme, setTheme] = useState("light");
 
   const lightMode = () => {
@@ -24,6 +27,7 @@ const App = () => {
   const darkMode = () => {
     setTheme("dark");
   };
+
   return (
     <BrowserRouter>
       <ThemeProvider theme={theme === "light" ? lightTheme : darkTheme}>
@@ -31,9 +35,7 @@ const App = () => {
         <Header lightMode={lightMode} darkMode={darkMode} />
         <NewsDisplay />
         <Switch>
-          <Route path="/logIn">
-            <LogIn />
-          </Route>
+          <Route path="/logIn">{!token && <LogIn setToken={setToken} />}</Route>
           <Route path="/register">
             <Register />
           </Route>

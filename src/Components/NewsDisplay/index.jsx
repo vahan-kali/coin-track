@@ -15,8 +15,11 @@ const NewsDisplay = () => {
   useEffect(() => {
     fetch("/cryptocurrencies/cryptoNews")
       .then((data) => data.json())
-      .then((response) => setNews(response.data));
-  });
+      .then((response) => {
+        console.log(response.data, "news data");
+        setNews(response.data);
+      });
+  }, []);
   return (
     <Wrapper>
       {/* {news.map((e, index) => (

@@ -48,7 +48,7 @@ const Form = styled.form``;
 const NewsLetterLabel = styled.label`
   text-align: center;
   width: 100%;
-  margin-bottom: 5px;
+  font-size: 25px;
 `;
 
 const NewLetterInput = styled.input`
@@ -59,6 +59,7 @@ const NewLetterInput = styled.input`
 const NewsLetterInputFieldWrapper = styled.div`
   display: flex;
   align-items: center;
+  margin-top: 10px;
 `;
 
 const NewsLetterButton = styled.button`

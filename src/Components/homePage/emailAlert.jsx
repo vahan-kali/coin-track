@@ -60,7 +60,10 @@ const Cartoon = styled.img`
   width: 200px;
 `;
 
-const CartoonSpeech = styled.p``;
+const CartoonSpeech = styled.p`
+  font-size: 20px;
+  line-height: 1.6;
+`;
 
 const Form = styled.form`
   display: flex;

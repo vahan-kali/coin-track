@@ -19,10 +19,9 @@ const Wrapper = styled.div`
   display: flex;
   align-items: center;
   justify-content: space-between;
-  left: 0;
-  bottom: 0;
   width: 100%;
   padding: 20px;
+  min-height: 10vh;
 `;
 
 const SocialIconsWrapper = styled.div``;

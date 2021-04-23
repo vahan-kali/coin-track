@@ -1,16 +1,13 @@
 import React, { useEffect, useState } from "react";
 import styled from "styled-components";
-import { VscCircleOutline } from "react-icons/vsc";
 
-const Dashboard = () => {
+const Dashboard = ({ amountBeingTracked, totalPnl }) => {
   return (
     <PnlDashboardWrapper>
       <PnlDashboard>
-        <TotalAmountInvested>10 000$</TotalAmountInvested>
+        <TotalAmountInvested>{amountBeingTracked} $</TotalAmountInvested>
         <CapitalChangeWrapper>
-          <CapitalChangePercentage>5%</CapitalChangePercentage>
-          <VscCircleOutline />
-          <CapitalChangeFiat>34</CapitalChangeFiat>$
+          <CapitalChangeFiat>{totalPnl.toFixed(2)}</CapitalChangeFiat>$
         </CapitalChangeWrapper>
       </PnlDashboard>
     </PnlDashboardWrapper>
@@ -36,8 +33,6 @@ const CapitalChangeWrapper = styled.div`
   display: flex;
   margin: 10px;
 `;
-
-const CapitalChangePercentage = styled.h2``;
 
 const CapitalChangeFiat = styled.h2``;
 

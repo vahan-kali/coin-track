@@ -6,15 +6,15 @@ const GlobalCryptoMarket = () => {
   const [globalMarketCap, setGlobalMarketCap] = useState(0);
   const [globalVolume, setGlobalVolume] = useState(0);
 
-  useEffect(() => {
-    fetch("/cryptocurrencies/globalData")
-      .then((data) => data.json())
-      .then((response) => {
-        console.log(response, "global crypto data");
-        setGlobalMarketCap(response.data.data.quote.USD.total_market_cap);
-        setGlobalVolume(response.data.data.quote.USD.total_volume_24h);
-      });
-  }, []);
+  // useEffect(() => {
+  //   fetch("/cryptocurrencies/globalData")
+  //     .then((data) => data.json())
+  //     .then((response) => {
+  //       console.log(response, "global crypto data");
+  //       setGlobalMarketCap(response.data.data.quote.USD.total_market_cap);
+  //       setGlobalVolume(response.data.data.quote.USD.total_volume_24h);
+  //     });
+  // }, []);
 
   // const interval = setInterval(() => {
   //   fetch("cryptocurrencies/globalData")
@@ -72,8 +72,11 @@ const DataWrapper = styled.div`
 `;
 const MarketCapTitle = styled.h2`
   margin-bottom: 20px;
+  font-size: 35px;
 `;
-const MarketCapValue = styled.h3``;
+const MarketCapValue = styled.h3`
+  font-size: 30px;
+`;
 
 const VolumeWrapper = styled.div`
   display: flex;
@@ -84,13 +87,17 @@ const VolumeWrapper = styled.div`
 `;
 
 const Title = styled.h4`
-  padding: 10px;
+  padding: 20px;
+  font-size: 40px;
 `;
 
 const VolumeTitle = styled.h2`
   margin-bottom: 20px;
+  font-size: 35px;
 `;
-const VolumeValue = styled.h3``;
+const VolumeValue = styled.h3`
+  font-size: 30px;
+`;
 
 const MarketCapWrapper = styled.div`
   display: flex;

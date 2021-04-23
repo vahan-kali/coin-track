@@ -57,7 +57,7 @@ const LiveMarket = styled.div`
 
 const ToolsTitle = styled.h2`
   text-align: center;
-  font-size: 35px;
+  font-size: 45px;
   color: #ff9906;
   padding: 50px;
 `;
@@ -101,6 +101,7 @@ const Scenerio = styled.div`
 const Description = styled.p`
   text-align: center;
   font-weight: bolder;
+  font-size: 18px;
 `;
 
 export default Tools;

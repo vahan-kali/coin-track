@@ -96,33 +96,47 @@ const Scenario = styled.div`
 `;
 
 const ScenarioInput = styled.input`
-  width: 275px;
+  width: 350px;
+  height: 35px;
+  margin: 10px 10px;
 `;
 
 const Section1 = styled.div`
-  margin: 5px;
+  font-size: 30px;
 `;
 
 const Section2 = styled.div`
-  margin: 5px;
+  font-size: 30px;
 `;
 
 const Section3 = styled.div`
-  margin: 5px;
+  font-size: 30px;
 `;
 
 const Form = styled.form``;
 
-const CalculateHodlButton = styled.button``;
+const CalculateHodlButton = styled.button`
+  padding: 10px;
+  font-size: 20px;
+  background: #ff9906;
+  border-radius: 50px;
+  margin-bottom: 10px;
+`;
 
 const ReturnButton = styled(Link)`
   color: #ff9906;
   text-decoration: none;
+  font-size: 20px;
   &:hover {
     border-bottom: 1px solid grey;
   }
 `;
 
-const NewScenerio = styled.button``;
+const NewScenerio = styled.button`
+  padding: 10px;
+  font-size: 20px;
+  background: #ff9906;
+  border-radius: 50px;
+`;
 
 export default HodlScenario;

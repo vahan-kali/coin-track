@@ -106,7 +106,7 @@ const NavItem = styled(NavLink)`
 
 const InputField = styled.input`
   margin-top: 25px;
-  font-size: 20px;
+  font-size: 30px;
 `;
 
 const FilterBarWrapper = styled.div`

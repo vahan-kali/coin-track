@@ -15,28 +15,28 @@ export default function SocialFollow() {
         <FontAwesomeIcon
           style={{ color: "#ff9906" }}
           icon={faTwitter}
-          size="2x"
+          size="4x"
         />
       </Icon>
       <Icon href="https://discord.com/">
         <FontAwesomeIcon
           style={{ color: "#ff9906" }}
           icon={faDiscord}
-          size="2x"
+          size="4x"
         />
       </Icon>
       <Icon href="https://www.binance.com/en">
         <FontAwesomeIcon
           style={{ color: "#ff9906" }}
           icon={faBitcoin}
-          size="2x"
+          size="4x"
         />
       </Icon>
       <Icon href="https://telegram.org/">
         <FontAwesomeIcon
           style={{ color: "#ff9906" }}
           icon={faTelegram}
-          size="2x"
+          size="4x"
         />
       </Icon>
     </Wrapper>

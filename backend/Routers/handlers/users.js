@@ -278,7 +278,7 @@ const getTrackedCoins = async (req, res) => {
     console.log(user.loginInfo.token, "%", userToken);
     return user.loginInfo.token == userToken;
   });
-
+  console.log(user, "user");
   const trackCoins = user.trackCoins;
   if (Object.keys(trackCoins).length !== 0) {
     res.status(200).json({

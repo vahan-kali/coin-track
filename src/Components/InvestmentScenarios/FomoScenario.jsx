@@ -99,7 +99,7 @@ const FomoScenario = () => {
             />
             ,
           </Section1>
-          <Section2>youd have {fomoResult} today</Section2>
+          <Section2>you would have {fomoResult} today</Section2>
           <ButtonsWrapper>
             <CalculateFomoButton type="submit">Calculate</CalculateFomoButton>{" "}
             <NewScenerio type="button" onClick={() => window.location.reload()}>
@@ -130,23 +130,41 @@ const Scenario = styled.div`
 
 const Section1 = styled.div`
   margin: 5px;
+  font-size: 35px;
 `;
 
 const Section2 = styled.div`
   margin: 5px;
+  font-size: 35px;
+  margin-bottom: 15px;
 `;
 
-const CalculateFomoButton = styled.button``;
+const CalculateFomoButton = styled.button`
+  padding: 10px;
+  font-size: 20px;
+  background: #ff9906;
+  border-radius: 50px;
+  margin-bottom: 10px;
+`;
 
 const ScenarioInput = styled.input`
   width: 350px;
+  height: 35px;
+  margin: 10px 10px;
 `;
 
-const NewScenerio = styled.button``;
+const NewScenerio = styled.button`
+  padding: 10px;
+  font-size: 20px;
+  background: #ff9906;
+  border-radius: 50px;
+`;
 
 const ReturnButton = styled(Link)`
   color: #ff9906;
   text-decoration: none;
+  font-size: 25px;
+
   &:hover {
     border-bottom: 1px solid grey;
   }

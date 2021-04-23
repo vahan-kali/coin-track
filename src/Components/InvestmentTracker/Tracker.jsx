@@ -1,7 +1,7 @@
 import React, { useEffect, useState } from "react";
 import styled from "styled-components";
 
-const Tracker = ({ coin }) => {
+const Tracker = ({ coin, getPnl }) => {
   const [pnl, setPnl] = useState(0);
 
   const [positionEquity, setPositionEquity] = useState(0);
@@ -29,6 +29,12 @@ const Tracker = ({ coin }) => {
     setCoinName(response.name);
 
     setPnl(
+      (amountBought / marketPriceBoughtAt) *
+        response.market_data.current_price.usd -
+        amountBought
+    );
+
+    getPnl(
       (amountBought / marketPriceBoughtAt) *
         response.market_data.current_price.usd -
         amountBought

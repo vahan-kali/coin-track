@@ -4,25 +4,22 @@ import { Link, useHistory } from "react-router-dom";
 import HodlScenario from "./HodlScenario";
 import FomoScenerio from "./FomoScenario";
 import { AiOutlineInfoCircle } from "react-icons/ai";
-import Modal from "react-modal";
 
 const InvestmentScenarios = () => {
-  const [fomoModal, setFomoModal] = useState(false);
-  const [hodlModal, setHodlModal] = useState(false);
   return (
     <Wrapper>
       <SpeechBubbleWrapper>
         <CartoonSpeech>
-          {window.location.pathname === "/investmentScenarios" &&
-            " What type of scenerio do you want me to assess?"}
+          {window.location.pathname === "/investmentScenarios" && (
+            <ScenarioTitle>
+              What type of scenerio do you want me to assess?
+            </ScenarioTitle>
+          )}
           {window.location.pathname === "/investmentScenarios" && (
             <FomoWrapper>
               <ScenarioTypeTitle exact to="/investmentScenarios/fomoScenario">
                 FOMO Scenerio
               </ScenarioTypeTitle>
-              <ScenarioInformationWrapper>
-                <AiOutlineInfoCircle onClick={() => setFomoModal(true)} />
-              </ScenarioInformationWrapper>
             </FomoWrapper>
           )}
           {window.location.pathname === "/investmentScenarios" && (
@@ -30,9 +27,6 @@ const InvestmentScenarios = () => {
               <ScenarioTypeTitle exact to="/investmentScenarios/hodlScenario">
                 HODL Scenerio
               </ScenarioTypeTitle>
-              <ScenarioInformationWrapper>
-                <AiOutlineInfoCircle onClick={() => setHodlModal(true)} />
-              </ScenarioInformationWrapper>
             </HodlWrapper>
           )}
 
@@ -45,12 +39,6 @@ const InvestmentScenarios = () => {
         </CartoonSpeech>
       </SpeechBubbleWrapper>
       <Cartoon src={"/btcCartoon.png"} alt="bitcoin cartoon" />
-      <Modal isOpen={fomoModal} onRequestClose={() => setFomoModal(false)}>
-        FOMO means FEAR OF MISSING OUT
-      </Modal>
-      <Modal isOpen={hodlModal} onRequestClose={() => setHodlModal(false)}>
-        HODL means HOLD ON FOR DEAR LIFE
-      </Modal>
     </Wrapper>
   );
 };
@@ -87,6 +75,9 @@ const SpeechBubbleWrapper = styled.div`
   }
 `;
 
+const ScenarioTitle = styled.h1`
+  font-size: 35px;
+`;
 const Cartoon = styled.img`
   width: 200px;
 `;
@@ -98,15 +89,12 @@ const CartoonSpeech = styled.p`
 const ScenarioTypeTitle = styled(Link)`
   margin-right: 5px;
   text-decoration: none;
+  font-size: 25px;
   color: #ff9906;
+  margin-top: 10px;
   &:hover {
     border-bottom: 1px solid grey;
   }
-`;
-
-const ScenarioInformationWrapper = styled.div`
-  display: flex;
-  cursor: pointer;
 `;
 
 const FomoWrapper = styled.div`

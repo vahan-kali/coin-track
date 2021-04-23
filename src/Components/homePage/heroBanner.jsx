@@ -50,7 +50,7 @@ const ContentWrapper = styled.div`
 
 const Title = styled.h1`
   text-align: center;
-  font-size: 45px;
+  font-size: 65px;
   color: #ff9906;
 `;
 

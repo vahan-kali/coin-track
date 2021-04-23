@@ -12,7 +12,7 @@ const Header = ({ lightMode, darkMode }) => {
   return (
     <Wrapper>
       <Logo
-        style={{ color: "#FF9906", "font-size": "30px" }}
+        style={{ color: "#FF9906", "font-size": "50px" }}
         onClick={() => history.push("/")}
       >
         <MdTrackChanges />
@@ -20,7 +20,7 @@ const Header = ({ lightMode, darkMode }) => {
       <NavItems
         style={{
           color: "#FF9906",
-          fontSize: "30px",
+          fontSize: "50px",
           justifyContent: "space-between",
         }}
       >
@@ -56,13 +56,15 @@ const Header = ({ lightMode, darkMode }) => {
 
 const Wrapper = styled.div`
   display: flex;
-  height: 40px;
+  height: 80px;
   align-items: center;
   flex: 1;
   z-index: 10;
   position: sticky;
   top: 0;
   background: whitesmoke;
+
+  justify-content: center;
 `;
 
 const Logo = styled.div`
@@ -96,6 +98,7 @@ const DropDown = styled.div`
 `;
 
 const MenuItem = styled.li`
+  font-size: 35px;
   &:hover {
     background: lightgray;
     cursor: pointer;

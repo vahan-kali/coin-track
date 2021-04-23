@@ -31,7 +31,7 @@ const NewsDisplay = () => {
 
 const Wrapper = styled.div`
   background: #252837;
-  height: 40px;
+  height: 80px;
   /* position: fixed; */
   top: 40;
   color: red;
@@ -46,12 +46,13 @@ const News = styled.p`
   animation-name: ${animationNews};
   transform: translateX(100vw);
   animation-duration: 100s;
-
+  margin-right: 50px;
   animation-iteration-count: 100;
   white-space: nowrap;
   font-family: "Consolas";
   font-weight: bolder;
   animation-timing-function: linear;
+  font-size: 30px;
 `;
 
 export default NewsDisplay;

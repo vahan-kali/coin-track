@@ -56,7 +56,7 @@ const Header = ({ lightMode, darkMode }) => {
 
 const Wrapper = styled.div`
   display: flex;
-  height: 80px;
+  height: 60px;
   align-items: center;
   flex: 1;
   z-index: 10;

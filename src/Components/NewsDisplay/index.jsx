@@ -22,9 +22,9 @@ const NewsDisplay = () => {
   }, []);
   return (
     <Wrapper>
-      {/* {news.map((e, index) => (
+      {news.map((e, index) => (
         <News key={index}>{e.headline}</News>
-      ))} */}
+      ))}
     </Wrapper>
   );
 };

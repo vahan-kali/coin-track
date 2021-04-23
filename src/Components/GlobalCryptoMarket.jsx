@@ -6,15 +6,15 @@ const GlobalCryptoMarket = () => {
   const [globalMarketCap, setGlobalMarketCap] = useState(0);
   const [globalVolume, setGlobalVolume] = useState(0);
 
-  // useEffect(() => {
-  //   fetch("/cryptocurrencies/globalData")
-  //     .then((data) => data.json())
-  //     .then((response) => {
-  //       console.log(response, "global crypto data");
-  //       setGlobalMarketCap(response.data.data.quote.USD.total_market_cap);
-  //       setGlobalVolume(response.data.data.quote.USD.total_volume_24h);
-  //     });
-  // }, []);
+  useEffect(() => {
+    fetch("/cryptocurrencies/globalData")
+      .then((data) => data.json())
+      .then((response) => {
+        console.log(response, "global crypto data");
+        setGlobalMarketCap(response.data.data.quote.USD.total_market_cap);
+        setGlobalVolume(response.data.data.quote.USD.total_volume_24h);
+      });
+  }, []);
 
   // const interval = setInterval(() => {
   //   fetch("cryptocurrencies/globalData")

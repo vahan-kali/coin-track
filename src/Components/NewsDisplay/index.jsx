@@ -25,8 +25,6 @@ const NewsDisplay = () => {
       {/* {news.map((e, index) => (
         <News key={index}>{e.headline}</News>
       ))} */}
-      {/* * 1. its working but it stops working after a few seconds (Why? figure out
-      with tc) */}
     </Wrapper>
   );
 };
@@ -47,9 +45,9 @@ const Wrapper = styled.div`
 const News = styled.p`
   animation-name: ${animationNews};
   transform: translateX(100vw);
-  animation-duration: 50s;
+  animation-duration: 100s;
 
-  animation-iteration-count: infinite;
+  animation-iteration-count: 100;
   white-space: nowrap;
   font-family: "Consolas";
   font-weight: bolder;

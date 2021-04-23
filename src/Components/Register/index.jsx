@@ -88,13 +88,17 @@ const RegisterWrapper = styled.form`
 const RegisterGreeting = styled.h2`
   color: white;
   background: #ff9906;
+  padding: 10px;
 `;
 
-const RegsiterInput = styled.input``;
+const RegsiterInput = styled.input`
+  font-size: 20px;
+`;
 
 const RegisterButton = styled.button`
   background: #ff9906;
   color: white;
+  font-size: 20px;
 `;
 
 export default Register;

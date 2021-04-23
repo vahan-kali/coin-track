@@ -7,7 +7,7 @@ const EmailAlert = () => {
       <SpeechBubbleWrapper>
         <CartoonSpeech>
           Just tell me what coin you want me to keep an eye on and tell me your
-          target price and i shall send you an email notification once your
+          target price and I shall send you an email notification once your
           price hits
         </CartoonSpeech>
         <Form>

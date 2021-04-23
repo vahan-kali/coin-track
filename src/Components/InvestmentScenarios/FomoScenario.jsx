@@ -81,18 +81,18 @@ const FomoScenario = () => {
       <Scenario>
         <Form onSubmit={handleFormSubmitFomo}>
           <Section1>
-            If you had bought{" "}
+            If you had bought
             <ScenarioInput
               type="number"
               name="amountInput"
               placeholder="Enter Amount Bought In USD"
             />{" "}
-            $ of{" "}
+            $ of
             <ScenarioInput
               name="coinInput"
               placeholder="Name Of Coin (format: bitcoin, litecoin, etc..)"
             />{" "}
-            at{" "}
+            at
             <ScenarioInput
               name="dateInput"
               placeholder="Date Bought at (format : dd-mm-yyyy eg. 30-12-2017)"

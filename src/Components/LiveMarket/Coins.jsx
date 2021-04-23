@@ -15,6 +15,9 @@ const Coins = ({
   const [isFavorite, setIsFavorite] = useState(false);
 
   const handleFavorite = async (e) => {
+    e.preventDefault();
+    console.log("########");
+    setIsFavorite(!isFavorite);
     await fetch("/user/storeFavoriteCoin", {
       method: "POST",
       headers: {
@@ -27,8 +30,7 @@ const Coins = ({
         userToken: localStorage.getItem("token"),
       }),
     });
-    console.log(isFavorite);
-    setIsFavorite(!isFavorite);
+    console.log("click fucntion", isFavorite);
   };
 
   useEffect(() => {
@@ -43,14 +45,15 @@ const Coins = ({
       .then((response) => response.json())
       .then((result) => {
         const keys = Object.keys(result.data);
-        console.log(keys, name);
+        console.log("use effect fetch", isFavorite);
+        console.log();
         if (keys.includes(coinId)) {
           setIsFavorite(true);
         } else {
           setIsFavorite(false);
         }
       });
-  }, [setIsFavorite]);
+  }, []);
 
   return (
     <Wrapper>
@@ -82,6 +85,7 @@ const Wrapper = styled.div`
   justify-content: space-around;
   flex: 1;
   border-bottom: 2px solid orange;
+  font-size: 20px;
 `;
 const CoinIdWrapper = styled.div`
   display: flex;

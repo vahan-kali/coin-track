@@ -213,4 +213,95 @@ const login = async (req, res) => {
   // client.close();
   // console.log("disconnected!");
 };
-module.exports = { storeFavoriteCoin, getFavoriteCoins, registerUser, login };
+
+const storeTrackedCoin = async (req, res) => {
+  console.log("store coin tracked");
+
+  const amountBought = req.body.amountBought;
+
+  const marketPrice = req.body.marketPrice;
+
+  const coin = req.body.coin;
+
+  const userToken = req.body.userToken;
+
+  const client = await MongoClient(MONGO_URI, options);
+
+  await client.connect();
+
+  const db = client.db();
+
+  console.log("connected!");
+
+  const data = await db.collection("users").find().toArray();
+
+  console.log(data, "Data");
+
+  const user = data.find((user) => {
+    console.log(user.loginInfo.token, "%", userToken);
+    return user.loginInfo.token == userToken;
+  });
+
+  const _id = user._id;
+
+  const query = { _id };
+
+  const updatedTrackCoins = user.trackCoins;
+
+  updatedTrackCoins[coin] = {
+    "market price": marketPrice,
+    "amount bought": amountBought,
+  };
+
+  const newValues = { $set: { trackCoins: updatedTrackCoins } };
+
+  await db.collection("users").updateOne(query, newValues);
+
+  client.close();
+  console.log("disconnected!");
+};
+
+const getTrackedCoins = async (req, res) => {
+  const userToken = req.get("usertoken");
+
+  const client = await MongoClient(MONGO_URI, options);
+
+  await client.connect();
+
+  const db = client.db();
+
+  console.log("connected!");
+
+  const data = await db.collection("users").find().toArray();
+
+  const user = data.find((user) => {
+    console.log(user.loginInfo.token, "%", userToken);
+    return user.loginInfo.token == userToken;
+  });
+
+  const trackCoins = user.trackCoins;
+  if (Object.keys(trackCoins).length !== 0) {
+    res.status(200).json({
+      status: 200,
+      data: trackCoins,
+      message: "data received successfully",
+    });
+  } else {
+    res
+      .status(200)
+      .json({ status: 200, data: trackCoins, message: "no data available" });
+  }
+
+  client.close();
+
+  console.log("disconnected!");
+};
+
+module.exports = {
+  storeFavoriteCoin,
+  getFavoriteCoins,
+  registerUser,
+  login,
+  storeTrackedCoin,
+  getTrackedCoins,
+};

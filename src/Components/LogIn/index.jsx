@@ -77,19 +77,28 @@ const LoginWrapper = styled.form`
   transform: translate(-50%, -50%);
 `;
 
-const LogInGreeting = styled.h2``;
+const LogInGreeting = styled.h2`
+  color: white;
+  background: #ff9906;
+  padding: 10px;
+`;
 
 const RegisterButton = styled(Link)`
   text-decoration: none;
   background: white;
   text-align: center;
+  font-size: 20px;
+  padding: 5px;
 `;
 
-const SignInInput = styled.input``;
+const SignInInput = styled.input`
+  font-size: 20px;
+`;
 
 const SignInButton = styled.button`
   background: #ff9906;
   color: white;
+  font-size: 20px;
 `;
 
 export default LogIn;

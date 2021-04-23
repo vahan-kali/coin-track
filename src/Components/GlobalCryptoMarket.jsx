@@ -6,15 +6,15 @@ const GlobalCryptoMarket = () => {
   const [globalMarketCap, setGlobalMarketCap] = useState(0);
   const [globalVolume, setGlobalVolume] = useState(0);
 
-  // useEffect(() => {
-  //   fetch("/cryptocurrencies/globalData")
-  //     .then((data) => data.json())
-  //     .then((response) => {
-  //       console.log(response, "global crypto data");
-  //       setGlobalMarketCap(response.data.data.quote.USD.total_market_cap);
-  //       setGlobalVolume(response.data.data.quote.USD.total_volume_24h);
-  //     });
-  // });
+  useEffect(() => {
+    fetch("/cryptocurrencies/globalData")
+      .then((data) => data.json())
+      .then((response) => {
+        console.log(response, "global crypto data");
+        setGlobalMarketCap(response.data.data.quote.USD.total_market_cap);
+        setGlobalVolume(response.data.data.quote.USD.total_volume_24h);
+      });
+  }, []);
 
   // const interval = setInterval(() => {
   //   fetch("cryptocurrencies/globalData")
@@ -40,19 +40,15 @@ const GlobalCryptoMarket = () => {
       <DataWrapper>
         <MarketCapWrapper>
           <MarketCapTitle>Market Cap</MarketCapTitle>
-          <MarketCapValue>{globalMarketCap}</MarketCapValue>
-          <MarketCapChangeWrapper>
-            <MarketCapChange>5.9%</MarketCapChange>
-            <AiOutlineArrowUp />
-          </MarketCapChangeWrapper>
+          <MarketCapValue>
+            {globalMarketCap.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ",")}
+          </MarketCapValue>
         </MarketCapWrapper>
         <VolumeWrapper>
           <VolumeTitle>Volume 24h</VolumeTitle>
-          <VolumeValue>{globalVolume}</VolumeValue>
-          <VolumeChangeWrapper>
-            <VolumeChange>-4.4%</VolumeChange>
-            <AiOutlineArrowUp />
-          </VolumeChangeWrapper>
+          <VolumeValue>
+            {globalVolume.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ",")}
+          </VolumeValue>
         </VolumeWrapper>
       </DataWrapper>
     </Wrapper>
@@ -74,9 +70,11 @@ const DataWrapper = styled.div`
   display: flex;
   padding: 10px;
 `;
-const MarketCapTitle = styled.h2``;
+const MarketCapTitle = styled.h2`
+  margin-bottom: 20px;
+`;
 const MarketCapValue = styled.h3``;
-const MarketCapChange = styled.span``;
+
 const VolumeWrapper = styled.div`
   display: flex;
   flex-direction: column;
@@ -89,11 +87,10 @@ const Title = styled.h4`
   padding: 10px;
 `;
 
-const MarketCapChangeWrapper = styled.div``;
-const VolumeTitle = styled.h2``;
+const VolumeTitle = styled.h2`
+  margin-bottom: 20px;
+`;
 const VolumeValue = styled.h3``;
-const VolumeChange = styled.span``;
-const VolumeChangeWrapper = styled.div``;
 
 const MarketCapWrapper = styled.div`
   display: flex;

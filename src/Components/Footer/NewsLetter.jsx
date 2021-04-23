@@ -40,6 +40,7 @@ const Wrapper = styled.div`
   align-items: center;
   flex-direction: column;
   margin: 5px 25px;
+  font-size: 20px;
 `;
 
 const Form = styled.form``;
@@ -50,7 +51,10 @@ const NewsLetterLabel = styled.label`
   margin-bottom: 5px;
 `;
 
-const NewLetterInput = styled.input``;
+const NewLetterInput = styled.input`
+  height: 30px;
+  font-size: 20px;
+`;
 
 const NewsLetterInputFieldWrapper = styled.div`
   display: flex;

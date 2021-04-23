@@ -1,62 +1,100 @@
-import React, { useState, useEffect } from "react";
+import React, { useState, useEffect, useCallback } from "react";
 import styled from "styled-components";
-import { VscCircleOutline } from "react-icons/vsc";
+
 import { GrAdd } from "react-icons/gr";
 import Modal from "react-modal";
+import Tracker from "./Tracker";
+import Dashboard from "./Dashboard";
 
 Modal.setAppElement("#root");
 
 const InvestmentTracker = () => {
-  const [priceChange, setPriceChange] = useState(" ");
   const [modalIsOpen, setModalIsOpen] = useState(false);
-  const [coins, setCoins] = useState([]);
+
+  const [allCoins, setAllCoin] = useState([]);
+
+  const [trackedCoins, setTrackedCoins] = useState([]);
+
+  const [amountBeingTracked, setAmountBeingTracked] = useState(0);
 
   useEffect(() => {
     fetch("/cryptocurrencies/liveMarket")
       .then((data) => data.json())
-      .then((response) => setCoins(response.data));
-  });
+      .then((response) => setAllCoin(response.data, "coinsssss"));
 
-  const filteredCoins = coins.filter((coin) => coin.name.toLowerCase());
+    fetch("/user/getTrackedCoins", {
+      method: "GET",
+      headers: {
+        Accept: "application/json",
+        "Content-Type": "application/json",
+        usertoken: localStorage.getItem("token"),
+      },
+    })
+      .then((response) => response.json())
+      .then((result) => setTrackedCoins(result.data));
+  }, []);
+
+  const trackerFormHandler = async (e) => {
+    e.preventDefault();
+
+    await fetch("/user/storeTrackedCoin", {
+      method: "POST",
+      headers: {
+        Accept: "application/json",
+        "Content-Type": "application/json",
+      },
+      body: JSON.stringify({
+        coin: e.target.coin.value,
+        amountBought: e.target.amountUsd.value,
+        marketPrice: e.target.marketPrice.value,
+        userToken: localStorage.getItem("token"),
+      }),
+    });
+    // setAmountBeingTracked(e.target.amountUsd.value + amountBeingTracked);
+  };
 
   return (
     <Wrapper>
-      <PnlDashboardWrapper>
-        <PnlDashboard>
-          <TotalAmountInvested>10 000$</TotalAmountInvested>
-          <CapitalChangeWrapper>
-            <CapitalChangePercentage>5%</CapitalChangePercentage>
-            <VscCircleOutline />
-            <CapitalChangeFiat>34</CapitalChangeFiat>$
-          </CapitalChangeWrapper>
-        </PnlDashboard>
-      </PnlDashboardWrapper>
+      <Dashboard />
+
+      <FilterWrapper>
+        <CoinFilter>Coin</CoinFilter>
+        <AmountFilter>Amount Invested(USD)</AmountFilter>
+        <PositionEquity>Position Equity(USD)</PositionEquity>
+        <Pnl>Pnl(USD)</Pnl>
+      </FilterWrapper>
+      {Object.entries(trackedCoins).map((coin) => {
+        console.log(coin);
+        return <Tracker coin={coin} />;
+      })}
+
       <AddNewTrackerButton onClick={() => setModalIsOpen(true)}>
         <GrAdd />
       </AddNewTrackerButton>
+
       <Modal isOpen={modalIsOpen} onRequestClose={() => setModalIsOpen(false)}>
-        <Form>
+        <Form onSubmit={trackerFormHandler}>
           <FormWrapper>
-            <OrderTypeWrapper>
-              <input type="radio" id="buy" name="orderType" value="buy" />
-              <label for="buy">Buy</label>
-              <input type="radio" id="sell" name="orderType" value="sell" />
-              <label for="buy">Sell</label>
-            </OrderTypeWrapper>
             <ChooseCoinWrapper>
               <label for="coins">Track a coin:</label>{" "}
               <select id="coins" name="coin">
-                <option value="bitcoin">Bitcoin</option>
-                <option value="Litecoin">Litecoin</option>
+                {allCoins.map((coin) => {
+                  return <option value={coin.id}>{coin.name}</option>;
+                })}
               </select>
             </ChooseCoinWrapper>
             <AmountWrapper>
-              <label for="amount">Amount Sold or Bought:</label>{" "}
-              <input id="amount" type="number" />
+              <label for="amount">Amount Sold or Bought USD:</label>{" "}
+              <input id="amount" name="amountUsd" type="number" />
             </AmountWrapper>
             <MarketPriceBoughtOrSoldAtWrapper>
               <label for="marketPrice">Market price bought or sold at:</label>{" "}
-              <input id="marketPrice" type="number" />
+              <input
+                id="marketPrice"
+                name="marketPrice"
+                type="number"
+                step="any"
+              />
             </MarketPriceBoughtOrSoldAtWrapper>
             <TrackButtonWrapper>
               <button type="submit">Set Tracker</button>
@@ -74,12 +112,6 @@ const Wrapper = styled.div`
   justify-content: center;
 `;
 
-const PnlDashboardWrapper = styled.div`
-  padding: 50px;
-  background: linear-gradient(0deg, green 0%, rgba(0, 0, 0, 0) 90%);
-  display: flex;
-`;
-
 const MarketPriceBoughtOrSoldAtWrapper = styled.div``;
 
 const AmountWrapper = styled.div`
@@ -90,32 +122,35 @@ const TrackButtonWrapper = styled.div`
   margin: 10px;
 `;
 
-const OrderTypeWrapper = styled.div`
-  display: flex;
-  align-items: center;
-  margin: 10px;
-`;
-
 const ChooseCoinWrapper = styled.div`
   margin: 10px;
 `;
 
-const PnlDashboard = styled.div`
-  border: #ff9906 2px solid;
-`;
-
-const TotalAmountInvested = styled.h2`
-  margin: 10px;
-`;
-
-const CapitalChangeWrapper = styled.div`
+const CoinFilter = styled.p`
   display: flex;
-  margin: 10px;
+  align-items: center;
+`;
+const AmountFilter = styled.p`
+  display: flex;
+  align-items: center;
+`;
+const PositionEquity = styled.p`
+  display: flex;
+  align-items: center;
+`;
+const Pnl = styled.p`
+  display: flex;
+  align-items: center;
 `;
 
-const CapitalChangePercentage = styled.h2``;
-
-const CapitalChangeFiat = styled.h2``;
+const FilterWrapper = styled.div`
+  border-top: 1px #ff9906 solid;
+  border-bottom: 1px #ff9906 solid;
+  display: flex;
+  justify-content: space-around;
+  padding: 10px;
+  font-size: 20px;
+`;
 
 const Form = styled.form``;
 

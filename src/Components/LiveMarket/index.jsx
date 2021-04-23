@@ -3,11 +3,6 @@ import styled from "styled-components";
 import { NavLink } from "react-router-dom";
 import FavoriteCoins from "./FavoriteCoins";
 import GlobalCryptoMarket from "../GlobalCryptoMarket";
-import {
-  AiOutlineArrowLeft,
-  AiOutlineArrowRight,
-  AiOutlineArrowUp,
-} from "react-icons/ai";
 import Coins from "./Coins";
 
 const LiveMarket = () => {
@@ -54,43 +49,13 @@ const LiveMarket = () => {
             Favorites
           </NavItem>
         </NavLinkWrapper>
-
-        <PaginationIconsWrapper>
-          <AiOutlineArrowLeft />
-          <AiOutlineArrowRight />
-        </PaginationIconsWrapper>
       </NavBarWrapper>
       <FilterBarWrapper>
-        <Name>
-          Name
-          <FilterIconWrapper>
-            <AiOutlineArrowUp />
-          </FilterIconWrapper>
-        </Name>
-        <Price>
-          Price
-          <FilterIconWrapper>
-            <AiOutlineArrowUp />
-          </FilterIconWrapper>
-        </Price>
-        <Volume>
-          Volume
-          <FilterIconWrapper>
-            <AiOutlineArrowUp />
-          </FilterIconWrapper>
-        </Volume>
-        <MarketCap>
-          Market Cap
-          <FilterIconWrapper>
-            <AiOutlineArrowUp />
-          </FilterIconWrapper>
-        </MarketCap>
-        <Change24H>
-          Change 24h(%)
-          <FilterIconWrapper>
-            <AiOutlineArrowUp />
-          </FilterIconWrapper>
-        </Change24H>
+        <Name>Name</Name>
+        <Price>Price</Price>
+        <Volume>Volume</Volume>
+        <MarketCap>Market Cap</MarketCap>
+        <Change24H>Change 24h(%)</Change24H>
       </FilterBarWrapper>
       {window.location.pathname === "/liveMarket" &&
         filteredCoins.map((coin) => {
@@ -135,14 +100,13 @@ const NavItem = styled(NavLink)`
   margin: 0px 5px;
   text-decoration: none;
   color: #ff9906;
+  font-size: 30px;
+  margin-right: 20px;
 `;
 
 const InputField = styled.input`
-  margin-top: 15px;
-`;
-
-const PaginationIconsWrapper = styled.div`
-  margin-right: 10px;
+  margin-top: 25px;
+  font-size: 20px;
 `;
 
 const FilterBarWrapper = styled.div`
@@ -151,11 +115,7 @@ const FilterBarWrapper = styled.div`
   display: flex;
   justify-content: space-around;
   padding: 10px;
-`;
-
-const FilterIconWrapper = styled.div`
-  display: flex;
-  align-items: center;
+  font-size: 20px;
 `;
 
 const Name = styled.span`

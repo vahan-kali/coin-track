@@ -1,3 +1,4 @@
+const e = require("express");
 const fetch = require("node-fetch");
 
 const getGlobalData = async (req, res) => {

@@ -1,5 +1,7 @@
 import React, { useEffect, useState } from "react";
 import styled from "styled-components";
+import Coins from "./Coins";
+import Loading from "../../Loading";
 
 const FavoriteCoins = ({}) => {
   const [favoriteCoins, setFavoriteCoins] = useState([]);
@@ -39,7 +41,11 @@ const FavoriteCoins = ({}) => {
   }, []);
 
   if (favoriteCoins.length === 0) {
-    return <Wrapper>wait...</Wrapper>;
+    return (
+      <Wrapper>
+        <Loading />
+      </Wrapper>
+    );
   } else {
     return (
       <>

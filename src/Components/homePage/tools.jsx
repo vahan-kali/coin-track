@@ -46,8 +46,12 @@ const LiveMarket = styled.div`
   max-width: auto;
   height: 250px;
   justify-content: center;
+  transform: scale(1);
+  transition: 0.3s ease-in-out;
   &:hover {
     background: #ff9906;
+    border-radius: 200px;
+    transform: scale(1.25);
   }
 `;
 
@@ -69,8 +73,12 @@ const Track = styled.div`
   flex: calc(100 / 3);
   height: 250px;
   justify-content: center;
+  transform: scale(1);
+  transition: 0.3s ease-in-out;
   &:hover {
     background: #ff9906;
+    border-radius: 200px;
+    transform: scale(1.25);
   }
 `;
 
@@ -81,8 +89,12 @@ const Scenerio = styled.div`
   flex: calc(100 / 3);
   height: 250px;
   justify-content: center;
+  transform: scale(1);
+  transition: 0.3s ease-in-out;
   &:hover {
     background: #ff9906;
+    border-radius: 200px;
+    transform: scale(1.25);
   }
 `;
 
